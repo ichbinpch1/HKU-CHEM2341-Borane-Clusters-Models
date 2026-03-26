@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en-US" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Borane Clusters</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Italiana&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#1C2C44;
+      --gold:#B49D74;
+      --white: rgba(255,255,255,.92);
+      --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-serif: "Bodoni Moda", Georgia, "Times New Roman", Times, serif;
+      --font-hku: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-chem: "Italiana", Georgia, "Times New Roman", Times, serif;
+      --ink: #0b1220;
+      --ink2: rgba(11,18,32,.72);
+      --nav-h: 184px;
+      --page-w: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font-sans);
+      color: var(--white);
+      background:
+        radial-gradient(1100px 520px at 22% 18%, rgba(180,157,116,.14), rgba(180,157,116,0) 60%),
+        radial-gradient(900px 520px at 75% 30%, rgba(120,160,255,.10), rgba(120,160,255,0) 62%),
+        linear-gradient(180deg, #1C2C44 0%, #1A2940 42%, #18263C 100%);
+      overflow-x:hidden;
+      transition: opacity .24s ease;
+    }
+    body.is-leaving{ opacity: 0; }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--page-w); margin:0 auto; padding:0 22px; }
+
+    header.nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      transition: opacity .22s ease, transform .22s ease;
+      will-change: opacity, transform;
+    }
+    header.nav.is-hidden{
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+    }
+
+    .nav-in{
+      min-height: var(--nav-h);
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap: 24px;
+      padding: 14px 0 10px;
+    }
+
+    .logoLockup{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      user-select:none;
+    }
+    .logoLockup .hku{
+      font-family: var(--font-hku);
+      font-weight:300;
+      font-size:72px;
+      letter-spacing:.40em;
+      line-height:1;
+      color: rgba(255,255,255,.92);
+      padding-left:.40em;
+    }
+    .logoLockup .chem{
+      font-family: var(--font-chem);
+      font-weight:400;
+      font-size:32px;
+      letter-spacing:.46em;
+      line-height:1;
+      color: rgba(255,255,255,.72);
+      padding-left:.46em;
+    }
+
+    .tabsSide{
+      display:flex;
+      align-items:center;
+      gap: 36px;
+      width: 100%;
+    }
+    .tabsSide.left{
+      justify-content:center;
+      padding-right: 0;
+    }
+    .tabsSide.right{
+      justify-content:center;
+      padding-left: 0;
+    }
+    .topTab{
+      font-family: var(--font-hku);
+      font-size:15px;
+      letter-spacing:.20em;
+      line-height:1;
+      color: rgba(255,255,255,.82);
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-weight: 300;
+    }
+
+    .editorialSection{
+      padding: 70px 0 64px;
+      background: rgba(255,255,255,.98);
+      color: var(--ink);
+      isolation: isolate;
+    }
+    .editorialWrap{ max-width: var(--page-w); margin:0 auto; padding:0 22px; }
+    .editorialGrid{
+      display:grid;
+      grid-template-columns: minmax(220px, 0.6fr) 1fr;
+      gap: 28px;
+      align-items:center;
+    }
+    .editorialMedia{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .editorialImg{
+      width: min(320px, 100%);
+      height:auto;
+      filter: grayscale(1) brightness(0.35) contrast(1.2) sepia(1) hue-rotate(170deg) saturate(2.2);
+      opacity: 0.9;
+    }
+    .editorialText{ width:100%; }
+    .editorialTitle{
+      margin:0 0 14px;
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4vw, 56px);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align:center;
+      font-weight: 400;
+    }
+    .editorialRule{
+      width: min(220px, 72%);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(180,157,116,.95), rgba(180,157,116,.35));
+      margin: 18px auto 18px;
+    }
+    .editorialIntro{
+      margin: 0 auto 18px;
+      font-size: clamp(14px, 1.3vw, 16px);
+      line-height: 1.9;
+      color: rgba(11,18,32,.70);
+      text-align: justify;
+      text-align-last: center;
+      max-width: 62ch;
+      font-weight: 300;
+      text-wrap: balance;
+      hyphens: auto;
+    }
+    .editorialLead{
+      margin:0 auto;
+      font-size: clamp(14px, 1.3vw, 16px);
+      line-height: 1.9;
+      color: rgba(11,18,32,.74);
+      text-align: center;
+      max-width: 60ch;
+      font-weight: 300;
+      text-wrap: balance;
+    }
+    .editorialLead .line{
+      display:block;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(180,157,116,.28);
+    }
+    .editorialLead .line:last-child{ border-bottom:none; }
+
+    .historySection{
+      padding: 88px 0 84px;
+      background: #ffffff;
+    }
+    .historyPrelude{
+      margin: 0 0 64px;
+      text-align:center;
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 4vw, 64px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .historyGrid{
+      display:grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 44px;
+      align-items:center;
+    }
+    .historyPortraitBlock{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+    }
+    .historyPortraitFrame{
+      width:100%;
+      max-width: 430px;
+      overflow:hidden;
+      border-radius: 220px 220px 0 0;
+      background: transparent;
+      padding:0;
+      border:none;
+    }
+    .historyPortrait{
+      display:block;
+      width:100%;
+      height:auto;
+      aspect-ratio: 4 / 5;
+      object-fit:cover;
+      object-position: center top;
+      filter: grayscale(1) contrast(1.02);
+      background: transparent;
+    }
+    .historyCaption{
+      margin:0;
+      text-align:center;
+      color: rgba(11,18,32,.62);
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height:1.45;
+    }
+    .historyName{
+      display:inline-block;
+      white-space:nowrap;
+      margin-bottom:5px;
+      color: var(--ink);
+      letter-spacing:.01em;
+      text-transform:none;
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.3vw, 52px);
+      line-height:1.06;
+    }
+    .historyMeta{ display:block; }
+    .historyText{
+      text-align:center;
+      padding-top: 4px;
+    }
+    .historyText h2{
+      margin:0 0 12px;
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.2vw, 52px);
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .historyBio{
+      margin:0 auto;
+      max-width: 62ch;
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(11,18,32,.55);
+      letter-spacing: .01em;
+      text-align: justify;
+      text-align-last: center;
+      text-justify: inter-word;
+    }
+    .historyLink{
+      display:inline-block;
+      margin-top: 12px;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    footer{
+      padding: 24px 0 42px;
+      color: rgba(255,255,255,.70);
+      font-size: 16px;
+      line-height: 1.5;
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+    }
+    .footRow{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+      text-align:center;
+    }
+    .footLogo{
+      display:block;
+      margin: 0 auto 14px;
+      width: 92px;
+      height: auto;
+      opacity: .95;
+    }
+    .footProgram{
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.62);
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .footCredits{ font-size: 16px; }
+    .toTop{
+      padding:11px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      font-weight:700;
+      font-size: 14px;
+    }
+
+    @media (max-width:520px){
+      :root{ --nav-h: 140px; }
+      .nav-in{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px 0 10px;
+      }
+      .logoLockup .hku{font-size:48px;letter-spacing:.32em;padding-left:.32em}
+      .logoLockup .chem{font-size:22px;letter-spacing:.38em;padding-left:.38em}
+      .tabsSide{
+        justify-content:center !important;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .topTab{ font-size:13px; letter-spacing:.16em; }
+    }
+    @media (max-width: 920px){
+      .editorialSection{ padding: 46px 0 48px; }
+      .editorialTitle{ font-size: 38px; }
+      .editorialLead{ font-size: 18px; line-height:1.75; }
+      .editorialGrid{ grid-template-columns: 1fr; }
+      .editorialMedia{ order: 2; }
+      .historySection{ padding: 52px 0 56px; }
+      .historyPrelude{ margin-bottom: 32px; font-size: 40px; }
+      .historyGrid{ grid-template-columns: 1fr; gap: 26px; align-items:start; }
+      .historyPortraitFrame{ max-width: 360px; border-radius: 180px 180px 0 0; }
+      .historyText{ padding-top:0; }
+      .historyText h2{ font-size: 38px; letter-spacing:.10em; }
+      .historyBio{ font-size: 14px; line-height:1.82; max-width: 66ch; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="wrap nav-in">
+      <nav class="tabsSide left" aria-label="Primary left">
+        <a class="topTab" href="./about.html">ABOUT</a>
+        <a class="topTab" href="./<!doctype html16>.html#cluster-1">CLUSTERS</a>
+      </nav>
+      <a class="logoLockup" href="./<!doctype html16>.html#top" aria-label="HKU Chemistry Home">
+        <div class="hku">HKU</div>
+        <div class="chem">CHEMISTRY</div>
+      </a>
+      <nav class="tabsSide right" aria-label="Primary right">
+        <a class="topTab" href="./theory.html">THEORY</a>
+        <a class="topTab" href="./<!doctype html16>.html#pathway">EXAMPLES</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="editorialSection" id="structure-types">
+      <div class="editorialWrap">
+        <div class="editorialGrid">
+          <div class="editorialMedia">
+            <img
+              class="editorialImg"
+              src="./Deltahedral-borane-cluster-array-numbered-3D-bs-17.png"
+              alt="Deltahedral borane cluster array"
+              loading="lazy"
+            />
+          </div>
+          <div class="editorialText">
+            <h2 class="editorialTitle">The main structural types of borane clusters</h2>
+            <p class="editorialIntro">
+              The structure of borane clusters and their derivatives, such as carboranes and metallaboranes, can be predicted
+              with using Polyhedral Skeletal Electron Pair Theory (PSEPT), more widely known as the Wade's rules. It relates
+              the number of skeletal electron pairs (SEPs) to the geometry of the cluster. This allows us to classify boron
+              clusters according to how many vertices of a parent closed deltahedron are occupied by boron or other heteroatoms.
+            </p>
+            <div class="editorialRule" aria-hidden="true"></div>
+            <p class="editorialLead">
+              <span class="line">Closo clusters, which have complete deltahedral frameworks with n vertices, contain n+1 SEPs;</span>
+              <span class="line">Nido clusters, derived from a closo deltahedron with one vertex removed, and contain n+2 SEPs;</span>
+              <span class="line">Arachno clusters, derived from a closo deltahedron with two vertices removed, follow the general and contain n+3 SEPs.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="historySection" id="history">
+      <div class="wrap">
+        <h2 class="historyPrelude">Sculpting the Three-Center Symphony</h2>
+
+        <div class="historyGrid">
+          <div class="historyPortraitBlock">
+            <div class="historyPortraitFrame">
+              <img
+                class="historyPortrait"
+                src="./william_n_lipscomb_jr.jpg"
+                alt="Portrait of William Lipscomb"
+                loading="lazy"
+              />
+            </div>
+            <p class="historyCaption">
+              <span class="historyName">William Lipscomb</span>
+              <span class="historyMeta">NOBEL PRIZE LAUREATE IN CHEMISTRY (1976)</span>
+            </p>
+          </div>
+
+          <div class="historyText">
+            <h2>History</h2>
+            <p class="historyBio">
+              Boron hydride cluster structures began to be determined in 1948 with the characterization of decaborane. William Lipscomb won the 1976 Nobel Prize in Chemistry for this and later crystallographic studies, which revealed the prevalence of deltahedral borane structures. This work led to polyhedral skeletal electron pair theory and Wade’s rules for predicting many cluster structures.
+              The Nobel Prize in Chemistry 1976 was awarded to William N. Lipscomb "for his studies on the structure of boranes illuminating problems of chemical bonding".
+            </p>
+            <a class="historyLink" href="https://www.nobelprize.org/prizes/chemistry/1976/summary/" target="_blank" rel="noopener">Nobel Prize 1976 summary</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footRow">
+      <div class="footCredits">
+        <img class="footLogo" src="./hku-logo.png" alt="The University of Hong Kong logo" loading="lazy" />
+        <div class="footProgram">CHEM2341 • INORGANIC CHEMISTRY I • Borane Clusters</div>
+        <div>© 2026 Department of Chemistry, The University of Hong Kong.</div>
+        <div>Website Designed and Synthesized by Thomas Poon Cheuk Hei in Hong Kong.</div>
+      </div>
+      <a class="toTop" href="#top">Back to top</a>
+    </div>
+  </footer>
+  <script>
+    (function(){
+      const header = document.querySelector('header.nav');
+      if (!header) return;
+      let ticking = false;
+      const hideAfter = 60;
+      function onScroll(){
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY || document.documentElement.scrollTop || 0;
+          header.classList.toggle('is-hidden', y > hideAfter);
+          ticking = false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+  <script>
+    (function () {
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest('a[href]');
+        if (!a) return;
+        if (a.target && a.target !== '_self') return;
+        if (a.hasAttribute('download')) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const href = a.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+        const next = new URL(a.href, window.location.href);
+        const current = new URL(window.location.href);
+        if (next.origin !== current.origin) return;
+        if (next.pathname === current.pathname && next.search === current.search && next.hash) return;
+
+        e.preventDefault();
+        document.body.classList.add('is-leaving');
+        window.setTimeout(function () {
+          window.location.href = next.href;
+        }, 220);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en-US" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theory | Borane Clusters</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Italiana&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#1C2C44;
+      --gold:#B49D74;
+      --white: rgba(255,255,255,.92);
+      --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-serif: "Bodoni Moda", Georgia, "Times New Roman", Times, serif;
+      --font-hku: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-chem: "Italiana", Georgia, "Times New Roman", Times, serif;
+      --nav-h: 184px;
+      --page-w: 1120px;
+      --shadow-soft: 0 18px 60px rgba(0,0,0,.25);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font-sans);
+      color: var(--white);
+      background:
+        radial-gradient(1100px 520px at 22% 18%, rgba(180,157,116,.14), rgba(180,157,116,0) 60%),
+        radial-gradient(900px 520px at 75% 30%, rgba(120,160,255,.10), rgba(120,160,255,0) 62%),
+        linear-gradient(180deg, #1C2C44 0%, #1A2940 42%, #18263C 100%);
+      overflow-x:hidden;
+      transition: opacity .24s ease;
+    }
+    body.is-leaving{ opacity: 0; }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--page-w); margin:0 auto; padding:0 22px; }
+
+    header.nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      transition: opacity .22s ease, transform .22s ease;
+      will-change: opacity, transform;
+    }
+    header.nav.is-hidden{
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+    }
+    .nav-in{
+      min-height: var(--nav-h);
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap: 24px;
+      padding: 14px 0 10px;
+    }
+    .logoLockup{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      user-select:none;
+    }
+    .logoLockup .hku{
+      font-family: var(--font-hku);
+      font-weight:300;
+      font-size:72px;
+      letter-spacing:.40em;
+      line-height:1;
+      color: rgba(255,255,255,.92);
+      padding-left:.40em;
+    }
+    .logoLockup .chem{
+      font-family: var(--font-chem);
+      font-weight:400;
+      font-size:32px;
+      letter-spacing:.46em;
+      line-height:1;
+      color: rgba(255,255,255,.72);
+      padding-left:.46em;
+    }
+    .tabsSide{
+      display:flex;
+      align-items:center;
+      gap: 36px;
+      width: 100%;
+    }
+    .tabsSide.left{
+      justify-content:center;
+      padding-right: 0;
+    }
+    .tabsSide.right{
+      justify-content:center;
+      padding-left: 0;
+    }
+    .topTab{
+      font-family: var(--font-hku);
+      font-size:15px;
+      letter-spacing:.20em;
+      line-height:1;
+      color: rgba(255,255,255,.82);
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-weight: 300;
+    }
+
+    .blueSection{
+      padding: 44px 0;
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+    }
+    .blueSection h2{
+      margin:0 0 10px;
+      font-family: var(--font-serif);
+      font-size: 34px;
+    }
+    .blueSection p{
+      margin:0;
+      color: rgba(255,255,255,.72);
+      line-height: 1.75;
+      max-width: 72ch;
+    }
+    .theoryGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 26px;
+    }
+    .theoryCard{
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px;
+    }
+    .theoryCard h3{
+      margin:0 0 10px;
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: rgba(255,255,255,.95);
+    }
+    .ruleLine{
+      display:inline-block;
+      margin: 2px 0 12px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(180,157,116,.16);
+      border: 1px solid rgba(180,157,116,.35);
+      color: rgba(255,255,255,.92);
+      font-size: 13px;
+      letter-spacing: .06em;
+    }
+    .theoryCard p{
+      margin:0;
+      font-size: 14px;
+      line-height: 1.72;
+      color: rgba(255,255,255,.74);
+      max-width: none;
+    }
+
+    footer{
+      padding: 24px 0 42px;
+      color: rgba(255,255,255,.70);
+      font-size: 16px;
+      line-height: 1.5;
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+    }
+    .footRow{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+      text-align:center;
+    }
+    .footLogo{
+      display:block;
+      margin: 0 auto 14px;
+      width: 92px;
+      height: auto;
+      opacity: .95;
+    }
+    .footProgram{
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.62);
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .footCredits{ font-size: 16px; }
+    .toTop{
+      padding:11px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      font-weight:700;
+      font-size: 14px;
+    }
+
+    @media (max-width:900px){
+      .theoryGrid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width:520px){
+      :root{ --nav-h: 140px; }
+      .nav-in{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px 0 10px;
+      }
+      .logoLockup .hku{font-size:48px;letter-spacing:.32em;padding-left:.32em}
+      .logoLockup .chem{font-size:22px;letter-spacing:.38em;padding-left:.38em}
+      .tabsSide{
+        justify-content:center !important;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .topTab{ font-size:13px; letter-spacing:.16em; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="wrap nav-in">
+      <nav class="tabsSide left" aria-label="Primary left">
+        <a class="topTab" href="./about.html">ABOUT</a>
+        <a class="topTab" href="./<!doctype html16>.html#cluster-1">CLUSTERS</a>
+      </nav>
+      <a class="logoLockup" href="./<!doctype html16>.html#top" aria-label="HKU Chemistry Home">
+        <div class="hku">HKU</div>
+        <div class="chem">CHEMISTRY</div>
+      </a>
+      <nav class="tabsSide right" aria-label="Primary right">
+        <a class="topTab" href="./theory.html">THEORY</a>
+        <a class="topTab" href="./<!doctype html16>.html#pathway">EXAMPLES</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="blueSection" id="theory">
+      <div class="wrap">
+        <h2>Learn Theory</h2>
+        <p>
+          Wade’s rules relate cluster structure to skeletal electron pairs. For borane clusters, the key idea is to count the electrons used in cage bonding and compare that value with the expected pattern for closo, nido, and arachno structures.
+        </p>
+
+        <div class="theoryGrid">
+          <div class="theoryCard">
+            <h3>Wade’s rules</h3>
+            <div class="ruleLine">closo: n + 1 • nido: n + 2 • arachno: n + 3</div>
+            <p>
+              Here, n is the number of skeletal boron vertices in the cluster, and SEP means skeletal electron pairs. Closo clusters are closed deltahedra, nido clusters are derived by removing one vertex from the parent closo cage, and arachno clusters by removing two.
+            </p>
+          </div>
+
+          <div class="theoryCard">
+            <h3>Skeletal bonding</h3>
+            <div class="ruleLine">SEP = skeletal e<sup>−</sup> / 2</div>
+            <p>
+              In borane chemistry, not all valence electrons belong to the cluster framework. Terminal B–H bonds are exohedral and are not counted as skeletal. The skeletal count refers only to the electrons participating in cage bonding between boron atoms and in delocalized cluster bonding.
+            </p>
+          </div>
+
+          <div class="theoryCard">
+            <h3>Bridging H and 3c–2e bonds</h3>
+            <div class="ruleLine">electron-deficient bonding</div>
+            <p>
+              Many boranes contain bridging hydrogens and three-center two-electron (3c–2e) bonds. These are a hallmark of electron-deficient compounds and explain why simple localized two-center bond pictures do not fully describe borane structures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footRow">
+      <div class="footCredits">
+        <img class="footLogo" src="./hku-logo.png" alt="The University of Hong Kong logo" loading="lazy" />
+        <div class="footProgram">CHEM2341 • INORGANIC CHEMISTRY I • Borane Clusters</div>
+        <div>© 2026 Department of Chemistry, The University of Hong Kong.</div>
+        <div>Website Designed and Synthesized by Thomas Poon Cheuk Hei in Hong Kong.</div>
+      </div>
+      <a class="toTop" href="#top">Back to top</a>
+    </div>
+  </footer>
+  <script>
+    (function(){
+      const header = document.querySelector('header.nav');
+      if (!header) return;
+      let ticking = false;
+      const hideAfter = 60;
+      let touchY = null;
+      function setHidden(hidden){
+        header.classList.toggle('is-hidden', !!hidden);
+      }
+      function onScroll(){
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY || document.documentElement.scrollTop || 0;
+          setHidden(y > hideAfter);
+          ticking = false;
+        });
+      }
+      function onWheel(e){
+        if (e.deltaY > 0) setHidden(true);
+        if (e.deltaY < 0) setHidden(false);
+      }
+      function onTouchStart(e){
+        if (!e.touches || !e.touches.length) return;
+        touchY = e.touches[0].clientY;
+      }
+      function onTouchMove(e){
+        if (!e.touches || !e.touches.length || touchY == null) return;
+        const y = e.touches[0].clientY;
+        const delta = y - touchY;
+        if (delta < -3) setHidden(true);
+        if (delta > 3) setHidden(false);
+        touchY = y;
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('wheel', onWheel, { passive: true });
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      onScroll();
+    })();
+  </script>
+  <script>
+    (function () {
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest('a[href]');
+        if (!a) return;
+        if (a.target && a.target !== '_self') return;
+        if (a.hasAttribute('download')) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const href = a.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+        const next = new URL(a.href, window.location.href);
+        const current = new URL(window.location.href);
+        if (next.origin !== current.origin) return;
+        if (next.pathname === current.pathname && next.search === current.search && next.hash) return;
+
+        e.preventDefault();
+        document.body.classList.add('is-leaving');
+        window.setTimeout(function () {
+          window.location.href = next.href;
+        }, 220);
+      });
+    })();
+  </script>
+</body>
+</html>
